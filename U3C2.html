@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="logo2.ico">
+    <title>Arduino 102</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Jura', sans-serif;
+            background-color: black;
+            color: #75d719;
+            margin: 0;
+            padding: 20px;
+        }
+        th, td {
+            border: 1px solid #75d951;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .title {
+            border-bottom: 2px solid #75d719;
+            padding-bottom: 10px;
+        }
+        .list {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .subTitle {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        pre, code {
+            white-space: pre-wrap; /* Allows line breaks and wrapping */
+            font-family: 'Jura', sans-serif;
+        }
+        .container {
+            overflow-wrap: break-word; /* Breaks words at any character */
+            /* OR */
+            word-wrap: break-word; /* Older, but still widely supported */
+        }
+        .next-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #75d951;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #4caf50;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #75d951;
+            transition: all 0.3s ease-in-out;
+            margin-left: 5%;
+        }
+
+        .next-button:hover {
+            background-color: #4caf50;
+            box-shadow: 0 0 20px #75d951;
+            color: #fff;
+        }
+        .button-area{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Arduino 102: Arduino Basic functions</h1>
+        </header>
+
+        <section class="section">
+            <h2 class="title">Overview</h2>
+            <p>
+                Arduino is a prototype platform (open-source) based on an easy-to-use hardware and software. It consists of a circuit board, which can be programed (referred to as a microcontroller) and a ready-made software called Arduino IDE (Integrated Development Environment), which is used to write and upload the computer code to the physical board.
+</p>
+            <p>
+                The key features are −
+            </p>
+            <pre>Arduino boards are able to read analog or digital input signals from different sensors and turn it into an output such as activating a motor, turning LED on/off, connect to the cloud and many other actions.
+
+You can control your board functions by sending a set of instructions to the microcontroller on the board via Arduino IDE (referred to as uploading software).
+                
+Unlike most previous programmable circuit boards, Arduino does not need an extra piece of hardware (called a programmer) in order to load a new code onto the board. You can simply use a USB cable.
+                
+Additionally, the Arduino IDE uses a simplified version of C++, making it easier to learn to program.
+                
+Finally, Arduino provides a standard form factor that breaks the functions of the micro-controller into a more accessible package.</pre>
+
+            <img style="align-items: center;" src="board.jpg"/>
+
+        </section>
+
+        <section class="section">
+            <h2 class="title">Arduino Uno - Board Description</h2>
+            <p>
+                We will study the Arduino UNO board because it is the most popular board in the Arduino board family. In addition, it is the best board to get started with electronics and coding. Some boards look a bit different from the one given below, but most Arduinos have majority of these components in common.
+            </p>
+            <img src="board_description.jpg"/>
+            <h4>1. Power USB</h4>
+            <pre>
+Arduino board can be powered by using the USB cable from your computer. All you need to do is connect the USB cable to the USB connection (1).</pre>
+            <h4>2. Power (Barrel Jack)</h4>
+            <pre>
+Arduino boards can be powered directly from the AC mains power supply by connecting it to the Barrel Jack (2).</pre>
+            <h4>3. Voltage Regulator</h4>
+            <pre>
+The function of the voltage regulator is to control the voltage given to the Arduino board and stabilize the DC voltages used by the processor and other elements.</pre>
+            <h4>4. Crystal Oscillator</h4>
+            <pre>
+The crystal oscillator helps Arduino in dealing with time issues. How does Arduino calculate time? The answer is, by using the crystal oscillator. The number printed on top of the Arduino crystal is 16.000H9H. It tells us that the frequency is 16,000,000 Hertz or 16 MHz.</pre>
+            <h4>5, 17. Arduino Reset</h4>
+            <pre>
+You can reset your Arduino board, i.e., start your program from the beginning. You can reset the UNO board in two ways. First, by using the reset button (17) on the board. Second, you can connect an external reset button to the Arduino pin labelled RESET (5).</pre>
+            <h4>6, 7, 8, 9. Pins (3.3, 5, GND, Vin)</h4>
+            <pre>
+>   3.3V (6) − Supply 3.3 output volt
+                
+>   5V (7) − Supply 5 output volt
+                
+>   Most of the components used with Arduino board works fine with 3.3 volt and 5 volt.
+                
+>   GND (8)(Ground) − There are several GND pins on the Arduino, any of which can be used to ground your circuit.
+                
+>   Vin (9) − This pin also can be used to power the Arduino board from an external power source, like AC mains power supply.</pre>
+            <h4>10. Analog Pins</h4>
+            <pre>Analog pins
+
+The Arduino UNO board has six analog input pins A0 through A5. These pins can read the signal from an analog sensor like the humidity sensor or temperature sensor and convert it into a digital value that can be read by the microprocessor.</pre>
+            <h4>11. Main micro-controller</h4>
+            <pre>Each Arduino board has its own microcontroller (11). You can assume it as the brain of your board. The main IC (integrated circuit) on the Arduino is slightly different from board to board. The microcontrollers are usually of the ATMEL Company. You must know what IC your board has before loading up a new program from the Arduino IDE. This information is available on the top of the IC. For more details about the IC construction and functions, you can refer to the data sheet.</pre>
+            <h4>12. ICSP pin</h4>
+            <pre>Mostly, ICSP (12) is an AVR, a tiny programming header for the Arduino consisting of MOSI, MISO, SCK, RESET, VCC, and GND. It is often referred to as an SPI (Serial Peripheral Interface), which could be considered as an "expansion" of the output. Actually, you are slaving the output device to the master of the SPI bus.</pre>
+            <h4>13. Power LED Indicator</h4>
+            <pre>This LED should light up when you plug your Arduino into a power source to indicate that your board is powered up correctly. If this light does not turn on, then there is something wrong with the connection.</pre>
+            <h4>14. TX & RX LED's</h4>
+            <pre>On your board, you will find two labels: TX (transmit) and RX (receive). They appear in two places on the Arduino UNO board. First, at the digital pins 0 and 1, to indicate the pins responsible for serial communication. Second, the TX and RX led (13). The TX led flashes with different speed while sending the serial data. The speed of flashing depends on the baud rate used by the board. RX flashes during the receiving process.</pre>
+            <h4>15. Digital I/O</h4>
+            <pre>The Arduino UNO board has 14 digital I/O pins (15) (of which 6 provide PWM (Pulse Width Modulation) output. These pins can be configured to work as input digital pins to read logic values (0 or 1) or as digital output pins to drive different modules like LEDs, relays, etc. The pins labeled “~” can be used to generate PWM.</pre>
+            <h4>16. AREF</h4>
+            <pre>AREF stands for Analog Reference. It is sometimes, used to set an external reference voltage (between 0 and 5 Volts) as the upper limit for the analog input pins.</pre>
+        </section> 
+
+        <section class="section">
+            <h2 class="title">Program Structure of Arduino</h2>
+            <pre>The Arduino software is open-source. The source code for the Java environment is released under the GPL and the C/C++ microcontroller libraries are under the LGPL.
+
+Sketch − The first new terminology is the Arduino program called “sketch”.
+                
+Structure
+Arduino programs can be divided in three main parts: Structure, Values (variables and constants), and Functions. In this tutorial, we will learn about the Arduino software program, step by step, and how we can write the program without any syntax or compilation error.
+                
+Let us start with the Structure. Software structure consist of two main functions −
+                
+    Setup( ) function
+    Loop( ) function
+    </pre>
+    <img src="structure.jpg"/>
+    <pre>
+    Structure
+
+        Void setup ( ) {
+                
+        }
+                
+        PURPOSE − The setup() function is called when a sketch starts. Use it to initialize the variables, pin modes, start using libraries, etc. The setup function will only run once, after each power up or reset of the Arduino board.
+                
+        INPUT − -
+                
+        OUTPUT − -
+                
+        RETURN − -
+                
+        Void Loop ( ) {
+                
+        }
+
+        PURPOSE − After creating a setup() function, which initializes and sets the initial values, the loop() function does precisely what its name suggests, and loops consecutively, allowing your program to change and respond. Use it to actively control the Arduino board.
+                
+        INPUT − -
+                
+        OUTPUT − -
+                
+        RETURN − -</pre>
+        </section>
+
+        <section class="section">
+            <h2 class="title">Arduino Digital I/O Functions</h2>
+            <pre>In Arduino, digital I/O (Input/Output) functions allow the microcontroller to interact with external devices, such as sensors, LEDs, motors, and switches. These functions control the digital pins on the board, which can be set as either inputs or outputs.</pre>
+            <h4>1. Digital Pins in Arduino</h4>
+            <p>Arduino boards have digital pins labeled <strong>D0 to D13</strong>. These pins can be configured as <strong>input</strong> or <strong>output</strong>.</p>
+            <ul>
+                <li><strong>HIGH (1 or 5V/3.3V)</strong> - Voltage is present.</li>
+                <li><strong>LOW (0 or 0V/GND)</strong> - No voltage.</li>
+            </ul>
+            
+            <h4>2. Digital I/O Functions</h4>
+            
+            <h5>A. pinMode() - Configuring a Pin</h5>
+            <p>Used to set a pin as <code>INPUT</code>, <code>OUTPUT</code>, or <code>INPUT_PULLUP</code>.</p>
+            <pre><code>void setup() {
+            pinMode(7, OUTPUT);
+            pinMode(2, INPUT);
+        }</code></pre>
+            
+            <h5>B. digitalWrite() - Setting Output HIGH or LOW</h5>
+            <p>Used to turn ON or OFF a digital output.</p>
+            <pre><code>void setup() {
+            pinMode(7, OUTPUT);
+        }
+        
+        void loop() {
+            digitalWrite(7, HIGH); // Turn LED ON
+            delay(1000);
+            digitalWrite(7, LOW);  // Turn LED OFF
+            delay(1000);
+        }</code></pre>
+            
+            <h5>C. digitalRead() - Reading Digital Input</h5>
+            <p>Used to read the state of an input pin.</p>
+            <pre><code>void setup() {
+            pinMode(2, INPUT);
+            pinMode(13, OUTPUT);
+        }
+        
+        void loop() {
+            int buttonState = digitalRead(2);
+            if (buttonState == HIGH) {
+                digitalWrite(13, HIGH);
+            } else {
+                digitalWrite(13, LOW);
+            }
+        }</code></pre>
+            
+            <h4>3. Additional Notes</h4>
+            <ul>
+                <li><strong>Internal Pull-Up Resistors:</strong> You can enable an internal pull-up resistor using <code>pinMode(2, INPUT_PULLUP);</code>.</li>
+                <li><strong>PWM (Pulse Width Modulation):</strong> Digital pins with <code>~</code> (e.g., <strong>~3, ~5, ~6</strong>) support PWM for analog-like control.</li>
+            </ul>
+            
+            <h4>Summary Table</h4>
+            <table>
+                <tr>
+                    <th>Function</th>
+                    <th>Purpose</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><code>pinMode()</code></td>
+                    <td>Set pin as INPUT, OUTPUT, or INPUT_PULLUP</td>
+                    <td><code>pinMode(7, OUTPUT);</code></td>
+                </tr>
+                <tr>
+                    <td><code>digitalWrite()</code></td>
+                    <td>Set a pin HIGH or LOW</td>
+                    <td><code>digitalWrite(7, HIGH);</code></td>
+                </tr>
+                <tr>
+                    <td><code>digitalRead()</code></td>
+                    <td>Read if a pin is HIGH or LOW</td>
+                    <td><code>int state = digitalRead(2);</code></td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="section">
+    <h2 class="title">Arduino Analog I/O Functions</h2>
+    
+    <h4>1. Understanding Analog Pins in Arduino</h4>
+    <p>Arduino has dedicated analog pins labeled <strong>A0 to A5</strong> (in most boards) that support analog input. Unlike digital pins, which have only <strong>HIGH (1) or LOW (0)</strong> states, analog pins can read a range of values.</p>
+    
+    <h4>2. How Analog I/O Works</h4>
+    <h5>Analog Input (ADC - Analog to Digital Conversion)</h5>
+    <p>Arduino's analog input works using an ADC (Analog-to-Digital Converter), which converts an analog voltage (0V to 5V) into a digital value (0 to 1023).</p>
+    
+    <h5>Analog Output (PWM - Pulse Width Modulation)</h5>
+    <p>Since most Arduino boards do not have true analog output, they use <strong>PWM (Pulse Width Modulation)</strong> to simulate analog output by rapidly switching the pin between HIGH and LOW at varying duty cycles.</p>
+    
+    <h4>3. Analog I/O Functions</h4>
+    
+    <h5>A. analogRead() - Reading Analog Values</h5>
+    <p>Used to read an analog voltage (0-5V) and convert it to a value between 0 and 1023.</p>
+    <pre><code>void setup() {
+    Serial.begin(9600); // Start serial communication
+}
+
+void loop() {
+    int sensorValue = analogRead(A0); // Read analog input from A0
+    Serial.println(sensorValue); // Print value to Serial Monitor
+    delay(500);
+}</code></pre>
+    
+    <h5>B. analogWrite() - Simulating Analog Output using PWM</h5>
+    <p>Writes a pseudo-analog output using PWM (values between 0 and 255).</p>
+    <pre><code>void setup() {
+    pinMode(9, OUTPUT); // Set pin 9 as output
+}
+
+void loop() {
+    analogWrite(9, 128); // Set PWM value (50% duty cycle)
+    delay(1000);
+    analogWrite(9, 255); // Set PWM value (100% duty cycle)
+    delay(1000);
+}</code></pre>
+    
+    <h3>4. Summary Table</h3>
+    <table>
+        <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td><code>analogRead()</code></td>
+            <td>Reads an analog voltage (0-5V) and returns a value (0-1023)</td>
+            <td><code>int val = analogRead(A0);</code></td>
+        </tr>
+        <tr>
+            <td><code>analogWrite()</code></td>
+            <td>Outputs a PWM signal (0-255)</td>
+            <td><code>analogWrite(9, 128);</code></td>
+        </tr>
+    </table>
+        </section>
+
+        <section class="section">
+            <h2 class="title">Arduino Advanced I/O Functions</h2>
+    
+    <h4>1. Advanced I/O Capabilities</h4>
+    <p>Arduino provides several advanced I/O functions for precise control over hardware peripherals.</p>
+    
+    <h4>2. Advanced I/O Functions</h4>
+    
+    <h5>A. shiftOut() - Serial Data Output</h5>
+    <p>Used to send data one bit at a time to shift registers.</p>
+    <pre><code>int data = 0b10101010;
+void setup() {
+    pinMode(11, OUTPUT);
+    pinMode(12, OUTPUT);
+}
+void loop() {
+    shiftOut(11, 12, MSBFIRST, data);
+    delay(1000);
+}</code></pre>
+    
+    <h5>B. shiftIn() - Serial Data Input</h5>
+    <p>Reads serial data one bit at a time.</p>
+    <pre><code>int incoming;
+void setup() {
+    pinMode(6, INPUT);
+    pinMode(7, OUTPUT);
+}
+void loop() {
+    incoming = shiftIn(6, 7, LSBFIRST);
+}</code></pre>
+    
+    <h5>C. pulseIn() - Measuring Pulse Width</h5>
+    <p>Measures the duration of a HIGH or LOW pulse.</p>
+    <pre><code>long duration;
+void setup() {
+    pinMode(8, INPUT);
+}
+void loop() {
+    duration = pulseIn(8, HIGH);
+}</code></pre>
+    
+    <h5>D. tone() & noTone() - Generating Sound</h5>
+    <p>Generates a square wave of a specified frequency.</p>
+    <pre><code>void setup() {
+    tone(9, 1000); // 1 kHz tone
+    delay(500);
+    noTone(9);
+}</code></pre>
+        
+            <h4>Summary Table</h4>
+            <table>
+                <tr>
+                    <th>Function</th>
+                    <th>Purpose</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><code>shiftOut()</code></td>
+                    <td>Serially shift bits to output device</td>
+                    <td><code>shiftOut(11, 12, MSBFIRST, 0xAA);</code></td>
+                </tr>
+                <tr>
+                    <td><code>shiftIn()</code></td>
+                    <td>Serially read bits from input</td>
+                    <td><code>int data = shiftIn(6, 7, LSBFIRST);</code></td>
+                </tr>
+                <tr>
+                    <td><code>pulseIn()</code></td>
+                    <td>Measure pulse duration</td>
+                    <td><code>long duration = pulseIn(8, HIGH);</code></td>
+                </tr>
+                <tr>
+                    <td><code>tone()</code></td>
+                    <td>Generate square wave sound</td>
+                    <td><code>tone(9, 1000);</code></td>
+                </tr>
+                <tr>
+                    <td><code>noTone()</code></td>
+                    <td>Stop tone generation</td>
+                    <td><code>noTone(9);</code></td>
+                </tr>
+            </table>
+        </section>
+        <div class="button-area">
+            <a href="U3C1.html" class="next-button">Back</a>
+            <a href="U3C3.html" class="next-button">Next</a>
+        </div>
+    </div>
+</body>
+</html>

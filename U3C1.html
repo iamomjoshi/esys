@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="logo2.ico">
+    <title>Arduino 101</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Jura', sans-serif;
+            background-color: black;
+            color: #75d719;
+            margin: 0;
+            padding: 20px;
+        }
+        th, td {
+            border: 1px solid #75d951;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .title {
+            border-bottom: 2px solid #75d719;
+            padding-bottom: 10px;
+        }
+        .list {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .subTitle {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        pre, code {
+            white-space: pre-wrap; /* Allows line breaks and wrapping */
+            font-family: 'Jura', sans-serif;
+        }
+        .container {
+            overflow-wrap: break-word; /* Breaks words at any character */
+            /* OR */
+            word-wrap: break-word; /* Older, but still widely supported */
+        }
+        .next-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #75d951;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #4caf50;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #75d951;
+            transition: all 0.3s ease-in-out;
+            margin-left: 5%;
+        }
+
+        .next-button:hover {
+            background-color: #4caf50;
+            box-shadow: 0 0 20px #75d951;
+            color: #fff;
+        }
+        .button-area{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Arduino 101: Understanding Arduino Basics</h1>
+        </header>
+
+        <section class="section">
+            <h2 class="title">What Is Arduino?</h2>
+            <p>
+                Arduino is an open-source electronics platform designed to make it easy for beginners and professionals to create interactive projects. It consists of both hardware (Arduino boards) and software (Arduino IDE), allowing users to write and upload code to control electronic components like sensors, motors, and LEDs.
+            </p>
+            <p>
+                Arduino (/ɑːrˈdwiːnoʊ/) is an Italian open-source hardware and software company, project, and user community that designs and manufactures single-board microcontrollers and microcontroller kits for building digital devices. Its hardware products are licensed under a CC BY-SA license, while the software is licensed under the GNU Lesser General Public License (LGPL) or the GNU General Public License (GPL), permitting the manufacture of Arduino boards and software distribution by anyone. Arduino board designs use a variety of microprocessors and controllers. The boards are equipped with sets of digital and analog input/output (I/O) pins that may be interfaced to various expansion boards ('shields') or breadboards (for prototyping) and other circuits. The boards feature serial communications interfaces, including Universal Serial Bus (USB) on some models, which are also used for loading programs. The microcontrollers can be programmed using the C and C++ programming languages (Embedded C), using a standard API which is also known as the Arduino Programming Language, inspired by the Processing language and used with a modified version of the Processing IDE.
+            </p>
+            <p>
+                Due to its simplicity and versatility, Arduino is widely used in robotics, IoT, home automation, industrial applications, and educational projects.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="title">Arduino's History and Founding</h2>
+            <p>
+                The Arduino project began at the Interaction Design Institute Ivrea (IDII) in Italy to provide an affordable alternative to the BASIC Stamp microcontroller, which cost $50 at the time. In 2004, Hernando Barragán developed the Wiring platform as part of his Master's thesis under Massimo Banzi and Casey Reas. Wiring featured an ATmega128 microcontroller, an IDE based on Processing, and simplified programming functions.
+            </p>
+            <p>
+                In 2005, Banzi, along with David Mellis and David Cuartielles, modified Wiring to support the cheaper ATmega8 microcontroller, leading to the creation of Arduino. The original core team included Massimo Banzi, David Cuartielles, Tom Igoe, Gianluca Martino, and David Mellis.
+            </p>
+            <img src="The_first_Arduino.jpeg">
+            <p>
+                Arduino's open-source nature led to the development of lighter and more affordable versions, contributing to its widespread adoption. By 2011, over 300,000 official Arduino boards had been produced, and by 2013, the number had grown to 700,000.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="title">Key Features of Arduino</h2>
+            <ul class="list">
+                <li><strong>Open-Source Hardware & Software:</strong> 
+                    The design and source code are freely available, enabling modifications and community contributions.
+                    Users can develop custom boards based on Arduino's architecture.</li>
+                    <br>
+                <li><strong>Microcontroller-Based:</strong> Arduino boards use microcontrollers like ATmega328P (Uno), ATmega2560 (Mega), and SAM3X8E (Due).
+                    These chips control input/output operations for sensors, motors, and displays.</li>
+                    <br>
+                <li><strong> Simple & Beginner-Friendly Programming:</strong> Uses a C/C++-based language with an easy-to-learn syntax.
+                    Built-in functions like digitalWrite(), analogRead(), and delay() simplify coding.</li>
+                    <br>
+                <li><strong>Arduino IDE (Integrated Development Environment):</strong> A user-friendly software tool for writing, compiling, and uploading code.
+                    Available for Windows, macOS, and Linux.</li>
+                    <br>
+                <li><strong>Plug-and-Play USB Interface:</strong> Arduino connects via USB for power, programming, and serial communication.</li><br>
+                <li><strong>Wide Range of Boards for Different Applications:</strong> Arduino Uno – Best for beginners.
+                    Arduino Mega – More I/O pins for complex projects.
+                    Arduino Nano – Compact and portable.
+                    Arduino Due – 32-bit processing for advanced applications.</li><br>
+                <li><strong>Multiple Input/Output (I/O) Options:</strong> Digital I/O Pins – Control LEDs, motors, buzzers, etc.
+                    Analog Input Pins – Read sensor values like temperature or light.
+                    </li><br>
+                <li><strong>Supports Various Communication Protocols:</strong> I2C – Connects multiple devices like sensors and displays.
+                    SPI – High-speed data exchange with modules like SD cards.
+                    UART (Serial Communication) – Communicates with other microcontrollers.</li><br>
+                <li><strong>Extensive Library Support:</strong> Pre-built libraries simplify working with sensors, displays, motors, and Wi-Fi modules.</li><br>
+                <li><strong>Versatile Power Options:</strong> Can be powered via USB, batteries, or external power adapters (5V or 12V).</li><br>
+                <li><strong>Real-Time Applications & Interrupt Support:</strong> Timers and interrupts allow efficient handling of tasks like sensor monitoring and motor control.</li><br>
+                <li><strong>Strong Community & Documentation:</strong> A vast online community provides tutorials, troubleshooting help, and project ideas.
+                    Official Arduino documentation supports beginners and experts alike.</li><br>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="title">How Does Arduino Work?</h2>
+            <p>Arduino is an open-source electronics platform designed to read inputs, process data, and control outputs. It consists of hardware (Arduino board) and software (Arduino IDE) that work together to create interactive projects.</p>
+            <h3 class="subTitle">Hardware Working.</h3>
+            <pre><p>A. Components of an Arduino Board
+
+    An Arduino board has several essential components:
+    Microcontroller (MCU) – The "brain" of the board, executing the code (e.g., ATmega328P on Arduino Uno).
+    Digital Input/Output (I/O) Pins – Control LEDs, motors, relays, etc.
+    nalog Input Pins – Read sensor values like temperature, humidity, and light.
+    Power Supply (Vin, 5V, 3.3V, GND) – Provides power from USB or an external adapter.
+    USB Port – Uploads code and communicates with the computer.
+    Clock Crystal (16 MHz on Uno) – Keeps timing precise for operations.
+
+B. Powering the Arduino
+
+    Arduino can be powered in multiple ways:
+    USB Connection (5V) – Powers and programs the board.
+    DC Power Jack (7-12V) – External adapter for standalone operation.
+    Battery (9V or 12V) – For portable projects.
+
+C. Input & Output (I/O) Operation
+
+    Inputs: Arduino reads data from sensors (e.g., temperature, buttons, light sensors).
+    Processing: The microcontroller processes the input data using the uploaded program.
+    Outputs: Based on the program, Arduino controls components like LEDs, motors, or displays.</p></pre>
+            <h3 class="subTitle">Software Working</h3>
+            <pre><p>A. Writing Code in Arduino IDE
+
+    Arduino programs (called sketches) are written in C/C++ in the Arduino IDE. A basic Arduino code structure includes:
+                
+        void setup() {
+            pinMode(13, OUTPUT); // Set pin 13 as an output
+        }
+                
+        void loop() {
+            digitalWrite(13, HIGH); // Turn LED ON
+            delay(1000); // Wait for 1 second
+            digitalWrite(13, LOW); // Turn LED OFF
+            delay(1000); // Wait for 1 second
+        }
+                
+    setup() – Runs once at startup to define pin modes and settings.
+    loop() – Runs continuously, executing tasks repeatedly.
+                
+B. Uploading Code to Arduino
+
+    Connect Arduino to PC via USB.
+    Select the Board & Port in Arduino IDE.
+    Click Upload – The compiled code is transferred to the microcontroller.
+    Arduino Runs the Code – Executes the instructions continuously.</p></pre>
+            <h3 class="subTitle">Communication & Interfacing</h3>
+            <pre>A. Communication Protocols
+
+    Arduino communicates with external devices using:
+    Serial Communication (UART) – Transfers data between Arduino and PC using Serial.begin(9600).
+    I2C Communication – Connects multiple devices like displays and sensors.
+    SPI Communication – High-speed data exchange with memory cards and sensors.
+                
+B. Interfacing with Sensors & Modules
+
+    Arduino can be connected to various external components:
+    Sensors (e.g., temperature, ultrasonic, light) – Input signals processed by Arduino.
+    Actuators (e.g., motors, relays, buzzers) – Controlled outputs based on code logic.
+    Displays (LCD, OLED, LED Matrix) – Show output information.</pre>
+            <h3 class="subTitle">Execution Flow of an Arduino Project</h3>
+            <pre>    Powering Up – Arduino starts when power is supplied.
+    Executing setup() – Runs initial configurations once.
+    Executing loop() – Runs repeatedly, processing inputs and controlling outputs.
+    Reading Inputs – Arduino reads sensor or button values.
+    Processing Data – The microcontroller processes data using logic and conditions.
+    Controlling Outputs – It sends commands to LEDs, motors, or displays.
+    Repeating the Loop – The process continues indefinitely until power is removed.
+                </pre>
+        </section>
+
+        <section class="section">
+            <h2 class="title">Common Arduino Boards</h2>
+            <p>
+                Different Arduino boards are available for various applications.
+            </p>
+            <table>
+                <tr>
+                    <th>Board</th>
+                    <th>Microcontroller</th>
+                    <th>Digital I/O Pins</th>
+                    <th>Analog Pins</th>
+                    <th>Best For</th>
+                </tr>
+                <tr>
+                    <td>Arduino Uno</td>
+                    <td>ATmega328P</td>
+                    <td>14</td>
+                    <td>6</td>
+                    <td>Beginners & small projects</td>
+                </tr>
+                <tr>
+                    <td>Arduino Mega</td>
+                    <td>ATmega2560</td>
+                    <td>54</td>
+                    <td>16</td>
+                    <td>Large projects with more I/O</td>
+                </tr>
+                <tr>
+                    <td>Arduino Nano</td>
+                    <td>ATmega328P</td>
+                    <td>14</td>
+                    <td>8</td>
+                    <td>Compact projects & wearables</td>
+                </tr>
+                <tr>
+                    <td>Arduino Due</td>
+                    <td>AT91SAM3X8E</td>
+                    <td>54</td>
+                    <td>12</td>
+                    <td>High-speed processing</td>
+                </tr>
+                <tr>
+                    <td>Arduino Leonardo</td>
+                    <td>ATmega32U4</td>
+                    <td>20</td>
+                    <td>12</td>
+                    <td>Emulating USB devices (keyboard/mouse)</td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2 class="title">Applications of Arduino</h2>
+            <pre>Arduino is used in a variety of real-world applications, including:
+
+1. Robotics
+
+    - Controlling robotic arms, drones, and automated vehicles.
+    - Line-following robots, obstacle-avoiding robots.
+
+2. IoT (Internet of Things)
+
+    - Home automation (smart lights, automatic door locks).
+    - Weather monitoring systems (temperature, humidity, and pressure sensors).
+
+3. Smart Wearable Technology
+
+    - Heart rate monitors, step counters, fitness bands.
+
+4. Embedded Systems & Industrial Automation
+
+    - Automatic plant watering systems.
+    - Factory process automation using sensors and actuators.
+
+5. Security & Surveillance
+
+    - Smart alarms and motion detection.
+    - Fingerprint or RFID-based access control.
+
+6. Educational & Research Projects
+
+    - Teaching electronics and programming in schools and universities.
+    - Experimenting with AI and machine learning on embedded devices.
+                </pre>
+        </section>
+        <div class="button-area">
+            <a href="U3C2.html" class="next-button">Next</a>
+        </div>
+    </div>
+</body>
+</html>

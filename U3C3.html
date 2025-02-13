@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="logo2.ico">
+    <title>Arduino 103</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Jura', sans-serif;
+            background-color: black;
+            color: #75d719;
+            margin: 0;
+            padding: 20px;
+        }
+        th, td {
+            border: 1px solid #75d951;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .title {
+            border-bottom: 2px solid #75d719;
+            padding-bottom: 10px;
+        }
+        .list {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .subTitle {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        pre, code {
+            white-space: pre-wrap; /* Allows line breaks and wrapping */
+            font-family: 'Jura', sans-serif;
+        }
+        .container {
+            overflow-wrap: break-word; /* Breaks words at any character */
+            /* OR */
+            word-wrap: break-word; /* Older, but still widely supported */
+        }
+        .next-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #75d951;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #4caf50;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #75d951;
+            transition: all 0.3s ease-in-out;
+            margin-left: 5%;
+        }
+
+        .next-button:hover {
+            background-color: #4caf50;
+            box-shadow: 0 0 20px #75d951;
+            color: #fff;
+        }
+        .button-area{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Arduino 103: Arduino Basic functions : 2</h1>
+        </header>
+
+        <section class="section">
+            <h2 class="title">Timer Functions</h2>
+            <h4>1. Timer Functions Overview</h4>
+    <p>Arduino provides built-in timer functions that allow precise time tracking without blocking code execution.</p>
+    
+    <h4>2. Common Timer Functions</h4>
+    
+    <h5>A. millis() - Get Elapsed Time in Milliseconds</h5>
+    <p>Returns the number of milliseconds since the Arduino board started running the current program.</p>
+    <pre><code>unsigned long timeElapsed = millis();</code></pre>
+    
+    <h5>B. micros() - Get Elapsed Time in Microseconds</h5>
+    <p>Returns the number of microseconds since the program started running.</p>
+    <pre><code>unsigned long timeElapsedMicro = micros();</code></pre>
+    
+    <h5>C. delay() - Pause Execution in Milliseconds</h5>
+    <p>Pauses the program for the specified number of milliseconds.</p>
+    <pre><code>delay(1000); // Waits for 1 second</code></pre>
+    
+    <h5>D. delayMicroseconds() - Pause Execution in Microseconds</h5>
+    <p>Pauses the program for the specified number of microseconds.</p>
+    <pre><code>delayMicroseconds(100); // Waits for 100 microseconds</code></pre>
+    
+    <h4>3. Summary Table</h4>
+    <table>
+        <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td><code>millis()</code></td>
+            <td>Returns time in milliseconds</td>
+            <td><code>unsigned long t = millis();</code></td>
+        </tr>
+        <tr>
+            <td><code>micros()</code></td>
+            <td>Returns time in microseconds</td>
+            <td><code>unsigned long t = micros();</code></td>
+        </tr>
+        <tr>
+            <td><code>delay()</code></td>
+            <td>Pauses execution in milliseconds</td>
+            <td><code>delay(1000);</code></td>
+        </tr>
+        <tr>
+            <td><code>delayMicroseconds()</code></td>
+            <td>Pauses execution in microseconds</td>
+            <td><code>delayMicroseconds(100);</code></td>
+        </tr>
+    </table>
+        </section>
+
+        <section class="section">
+            <h2 class="title">Arduino Communication Functions</h2>
+    
+    <h4>1. Introduction to Communication in Arduino</h4>
+    <p>Communication is essential for interfacing Arduino with other devices, sensors, and computers. Arduino supports multiple communication protocols, including Serial, I2C, and SPI.</p>
+    
+    <h4>2. Serial Communication</h4>
+    <p>Serial communication is used to transfer data between Arduino and external devices, such as computers or other microcontrollers, using the UART protocol.</p>
+    
+    <h5>A. Serial.begin() - Initialize Serial Communication</h5>
+    <p>Sets the baud rate for serial communication.</p>
+    <pre><code>Serial.begin(9600); // Initializes serial at 9600 baud rate</code></pre>
+    
+    <h5>B. Serial.print() & Serial.println() - Sending Data</h5>
+    <p>Sends data over the serial port.</p>
+    <pre><code>Serial.print("Hello, Arduino!");
+Serial.println("This is a new line");</code></pre>
+    
+    <h5>C. Serial.read() & Serial.available() - Receiving Data</h5>
+    <p>Reads incoming serial data.</p>
+    <pre><code>if (Serial.available() > 0) {
+    char data = Serial.read();
+    Serial.print("Received: ");
+    Serial.println(data);
+}</code></pre>
+    
+    <h4>3. I2C Communication</h4>
+    <p>I2C (Inter-Integrated Circuit) is a two-wire protocol used for communication between multiple devices.</p>
+    
+    <h5>A. Wire.begin() - Initialize I2C</h5>
+    <p>Starts the I2C communication.</p>
+    <pre><code>#include &lt;Wire.h&gt;
+Wire.begin();</code></pre>
+    
+    <h5>B. Wire.requestFrom() - Read Data from a Device</h5>
+    <p>Requests data from an I2C slave device.</p>
+    <pre><code>Wire.requestFrom(8, 6); // Request 6 bytes from device at address 8</code></pre>
+    
+    <h5>C. Wire.write() & Wire.read() - Sending and Receiving Data</h5>
+    <p>Sends and receives data over I2C.</p>
+    <pre><code>Wire.beginTransmission(8);
+Wire.write("Hello");
+Wire.endTransmission();</code></pre>
+    
+    <h4>4. SPI Communication</h4>
+    <p>SPI (Serial Peripheral Interface) is a high-speed communication protocol used for interfacing with sensors and peripherals.</p>
+    
+    <h5>A. SPI.begin() - Initialize SPI Communication</h5>
+    <p>Starts SPI communication.</p>
+    <pre><code>#include &lt;SPI.h&gt;
+SPI.begin();</code></pre>
+    
+    <h5>B. SPI.transfer() - Send and Receive Data</h5>
+    <p>Transfers data over SPI.</p>
+    <pre><code>byte data = SPI.transfer(0xFF); // Send 0xFF and receive response</code></pre>
+    
+    <h4>5. Summary Table</h4>
+    <table>
+        <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td><code>Serial.begin()</code></td>
+            <td>Initialize Serial Communication</td>
+            <td><code>Serial.begin(9600);</code></td>
+        </tr>
+        <tr>
+            <td><code>Serial.print()</code></td>
+            <td>Send Data Over Serial</td>
+            <td><code>Serial.print("Hello");</code></td>
+        </tr>
+        <tr>
+            <td><code>Wire.begin()</code></td>
+            <td>Initialize I2C Communication</td>
+            <td><code>Wire.begin();</code></td>
+        </tr>
+        <tr>
+            <td><code>SPI.begin()</code></td>
+            <td>Initialize SPI Communication</td>
+            <td><code>SPI.begin();</code></td>
+        </tr>
+    </table>
+        </section> 
+
+        <section class="section">
+            <h2 class="title">Arduino Interrupt Functions</h2>
+    
+    <h4>1. Introduction to Interrupts in Arduino</h4>
+    <p>Interrupts allow Arduino to respond to events immediately, without continuously checking conditions in the main loop. When an interrupt occurs, the current code execution is paused, and a special function (Interrupt Service Routine) is executed.</p>
+    
+    <h4>2. Types of Interrupts</h4>
+    <p>Arduino supports two types of interrupts:</p>
+    <ul>
+        <li><b>External Interrupts</b>: Triggered by external signals on specific pins.</li>
+        <li><b>Pin Change Interrupts</b>: Triggered when a digital pin changes state.</li>
+    </ul>
+    
+    <h4>3. External Interrupt Functions</h4>
+    <p>External interrupts are triggered on specific pins (e.g., pin 2 and pin 3 on Arduino Uno).</p>
+    
+    <h5>A. attachInterrupt() - Enable an Interrupt</h5>
+    <p>Attaches an interrupt to a specified pin.</p>
+    <pre><code>attachInterrupt(digitalPinToInterrupt(2), myISR, RISING);</code></pre>
+    <p>This line sets pin 2 to trigger the <code>myISR</code> function on a rising edge.</p>
+    
+    <h5>B. detachInterrupt() - Disable an Interrupt</h5>
+    <p>Detaches an interrupt from a pin, stopping it from triggering.</p>
+    <pre><code>detachInterrupt(digitalPinToInterrupt(2));</code></pre>
+    
+    <h4>4. Interrupt Service Routine (ISR)</h4>
+    <p>The ISR is the function that runs when an interrupt occurs. It should be as short as possible and avoid using functions like <code>delay()</code> or <code>Serial.print()</code>.</p>
+    <pre><code>void myISR() {
+    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); // Toggle LED
+}</code></pre>
+    
+    <h4>5. Pin Change Interrupts</h4>
+    <p>Pin change interrupts are available on all digital pins, but they require direct register manipulation.</p>
+    
+    <h5>A. Enabling Pin Change Interrupts</h5>
+    <pre><code>PCICR |= (1 << PCIE0);  // Enable Pin Change Interrupts for PCINT[7:0]
+PCMSK0 |= (1 << PCINT4);  // Enable interrupt on pin 4</code></pre>
+    
+    <h5>B. Pin Change Interrupt Service Routine</h5>
+    <pre><code>ISR(PCINT0_vect) {
+    Serial.println("Pin state changed!");
+}</code></pre>
+    
+    <h4>6. Summary Table</h4>
+    <table>
+        <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td><code>attachInterrupt()</code></td>
+            <td>Attach an external interrupt</td>
+            <td><code>attachInterrupt(digitalPinToInterrupt(2), myISR, RISING);</code></td>
+        </tr>
+        <tr>
+            <td><code>detachInterrupt()</code></td>
+            <td>Detach an external interrupt</td>
+            <td><code>detachInterrupt(digitalPinToInterrupt(2));</code></td>
+        </tr>
+        <tr>
+            <td><code>ISR()</code></td>
+            <td>Define an Interrupt Service Routine</td>
+            <td><code>ISR(PCINT0_vect) { /* code */ }</code></td>
+        </tr>
+    </table>
+        </section>
+
+        <section class="section">
+            <h2 class="title">Arduino Math Functions</h2>
+    
+    <h4>1. Introduction to Math Functions</h4>
+    <p>Arduino provides various mathematical functions to perform calculations efficiently. These functions help in manipulating numbers, performing trigonometry, rounding values, and more.</p>
+    
+    <h4>2. Basic Math Functions</h4>
+    
+    <h5>A. abs() - Absolute Value</h5>
+    <p>Returns the absolute (positive) value of a number.</p>
+    <pre><code>int x = -10;
+int y = abs(x); // y = 10</code></pre>
+    
+    <h5>B. constrain() - Limit a Value</h5>
+    <p>Constrains a value within a given range.</p>
+    <pre><code>int val = constrain(150, 0, 100); // val = 100</code></pre>
+    
+    <h5>C. max() and min() - Maximum and Minimum</h5>
+    <p>Returns the maximum or minimum value between two numbers.</p>
+    <pre><code>int a = max(10, 20); // a = 20
+int b = min(10, 20); // b = 10</code></pre>
+    
+    <h4>3. Rounding Functions</h4>
+    
+    <h5>A. round() - Round to Nearest Integer</h5>
+    <p>Rounds a floating-point number to the nearest whole number.</p>
+    <pre><code>float x = 4.7;
+int y = round(x); // y = 5</code></pre>
+    
+    <h5>B. floor() and ceil() - Round Down or Up</h5>
+    <p>floor() rounds down, and ceil() rounds up.</p>
+    <pre><code>float x = 4.7;
+int a = floor(x); // a = 4
+int b = ceil(x);  // b = 5</code></pre>
+    
+    <h4>4. Trigonometric Functions</h4>
+    
+    <h5>A. sin(), cos(), and tan()</h5>
+    <p>Returns the sine, cosine, or tangent of an angle (in radians).</p>
+    <pre><code>float angle = PI / 4;
+float s = sin(angle);
+float c = cos(angle);
+float t = tan(angle);</code></pre>
+    
+    <h5>B. radians() and degrees()</h5>
+    <p>Converts between degrees and radians.</p>
+    <pre><code>float rad = radians(180); // rad = PI
+float deg = degrees(PI); // deg = 180</code></pre>
+    
+    <h4>5. Random Number Functions</h4>
+    
+    <h5>A. random() - Generate Random Numbers</h5>
+    <p>Generates a random number within a specified range.</p>
+    <pre><code>int num = random(1, 100); // Random number between 1 and 99</code></pre>
+    
+    <h5>B. randomSeed() - Set Random Seed</h5>
+    <p>Initializes the random number generator with a seed.</p>
+    <pre><code>randomSeed(analogRead(0));</code></pre>
+    
+    <h4>6. Summary Table</h4>
+    <table>
+        <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td><code>abs()</code></td>
+            <td>Absolute value</td>
+            <td><code>abs(-10) // 10</code></td>
+        </tr>
+        <tr>
+            <td><code>constrain()</code></td>
+            <td>Limit a value</td>
+            <td><code>constrain(150, 0, 100) // 100</code></td>
+        </tr>
+        <tr>
+            <td><code>max()</code> / <code>min()</code></td>
+            <td>Max / Min value</td>
+            <td><code>max(10, 20) // 20</code></td>
+        </tr>
+        <tr>
+            <td><code>round()</code></td>
+            <td>Round to nearest</td>
+            <td><code>round(4.7) // 5</code></td>
+        </tr>
+        <tr>
+            <td><code>floor()</code> / <code>ceil()</code></td>
+            <td>Round down / up</td>
+            <td><code>floor(4.7) // 4</code></td>
+        </tr>
+        <tr>
+            <td><code>sin()</code>, <code>cos()</code>, <code>tan()</code></td>
+            <td>Trigonometry</td>
+            <td><code>sin(PI/4)</code></td>
+        </tr>
+        <tr>
+            <td><code>radians()</code> / <code>degrees()</code></td>
+            <td>Convert angles</td>
+            <td><code>radians(180) // PI</code></td>
+        </tr>
+        <tr>
+            <td><code>random()</code></td>
+            <td>Generate random number</td>
+            <td><code>random(1, 100)</code></td>
+        </tr>
+    </table>
+    <pre>
+        Example: 
+
+        code: 
+
+        double double__x = 45.45 ;
+        double double__y = 30.20 ;
+        
+        void setup() {
+           Serial.begin(9600);
+           Serial.print("cos num = ");
+           Serial.println (cos (double__x) ); // returns cosine of x
+           Serial.print("absolute value of num = ");
+           Serial.println (fabs (double__x) ); // absolute value of a float
+           Serial.print("floating point modulo = ");
+           Serial.println (fmod (double__x, double__y)); // floating point modulo
+           Serial.print("sine of num = ");
+           Serial.println (sin (double__x) ) ;// returns sine of x
+           Serial.print("square root of num : ");
+           Serial.println ( sqrt (double__x) );// returns square root of x
+           Serial.print("tangent of num : ");
+           Serial.println ( tan (double__x) ); // returns tangent of x
+           Serial.print("exponential value of num : ");
+           Serial.println ( exp (double__x) ); // function returns the exponential value of x.
+           Serial.print("cos num : ");
+        
+           Serial.println (atan (double__x) ); // arc tangent of x
+           Serial.print("tangent of num : ");
+           Serial.println (atan2 (double__y, double__x) );// arc tangent of y/x
+           Serial.print("arc tangent of num : ");
+           Serial.println (log (double__x) ) ; // natural logarithm of x
+           Serial.print("cos num : ");
+           Serial.println ( log10 (double__x)); // logarithm of x to base 10.
+           Serial.print("logarithm of num to base 10 : ");
+           Serial.println (pow (double__x, double__y) );// x to power of y
+           Serial.print("power of num : ");
+           Serial.println (square (double__x)); // square of x
+        }
+        
+        void loop() {
+        
+        }
+
+        serial output:
+
+        cos num = 0.10
+        absolute value of num = 45.45
+        floating point modulo =15.25
+        sine of num = 0.99
+        square root of num : 6.74
+        tangent of num : 9.67
+        exponential value of num : ovf
+        cos num : 1.55
+        tangent of num : 0.59
+        arc tangent of num : 3.82
+        cos num : 1.66
+        logarithm of num to base 10 : inf
+        power of num : 2065.70
+    </pre>
+        </section>
+
+        <section class="section">
+    <h2 class="title">Arduino Programming Language Reference</h2>
+    
+    <h4>1. Introduction</h4>
+    <p>Arduino programming is based on C/C++ and provides a set of built-in functions to interact with hardware easily.</p>
+    
+    <h4>2. Structure</h4>
+    
+    <h5>A. setup()</h5>
+    <p>Runs once when the Arduino is powered on or reset.</p>
+    <pre><code>void setup() {
+    Serial.begin(9600); // Initialize Serial Communication
+}</code></pre>
+    
+    <h5>B. loop()</h5>
+    <p>Runs continuously after setup() has completed.</p>
+    <pre><code>void loop() {
+    Serial.println("Hello, Arduino!");
+    delay(1000); // Wait for 1 second
+}</code></pre>
+    
+    <h4>3. Data Types</h4>
+    
+    <h5>A. Integer Types</h5>
+    <p>Used for whole numbers.</p>
+    <pre><code>int a = 10;
+long b = 100000L;
+byte c = 255;</code></pre>
+    
+    <h5>B. Floating Point</h5>
+    <p>Used for decimal numbers.</p>
+    <pre><code>float pi = 3.14;
+double precise = 3.141592653;</code></pre>
+    
+    <h4>4. Control Structures</h4>
+    
+    <h5>A. if-else</h5>
+    <p>Used for conditional execution.</p>
+    <pre><code>if (a > 5) {
+    Serial.println("a is greater than 5");
+} else {
+    Serial.println("a is 5 or less");
+}</code></pre>
+    
+    <h5>B. for Loop</h5>
+    <p>Repeats a block of code a specific number of times.</p>
+    <pre><code>for (int i = 0; i < 10; i++) {
+    Serial.println(i);
+}</code></pre>
+    
+    <h5>C. while Loop</h5>
+    <p>Repeats a block of code while a condition is true.</p>
+    <pre><code>int count = 0;
+while (count < 5) {
+    Serial.println(count);
+    count++;
+}</code></pre>
+    
+    <h4>5. Functions</h4>
+    
+    <h5>A. Defining Functions</h5>
+    <p>Functions allow code reuse and organization.</p>
+    <pre><code>int add(int x, int y) {
+    return x + y;
+}</code></pre>
+    
+    <h5>B. Calling Functions</h5>
+    <p>Use function calls to execute defined functions.</p>
+    <pre><code>int sum = add(5, 10);
+Serial.println(sum);</code></pre>
+    
+    <h4>6. Summary Table</h4>
+    <table>
+        <tr>
+            <th>Element</th>
+            <th>Description</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td><code>setup()</code></td>
+            <td>Initial setup function</td>
+            <td><code>void setup() {}</code></td>
+        </tr>
+        <tr>
+            <td><code>loop()</code></td>
+            <td>Main execution function</td>
+            <td><code>void loop() {}</code></td>
+        </tr>
+        <tr>
+            <td><code>if-else</code></td>
+            <td>Conditional execution</td>
+            <td><code>if (x > 5) {}</code></td>
+        </tr>
+        <tr>
+            <td><code>for</code></td>
+            <td>Looping construct</td>
+            <td><code>for (int i=0; i<10; i++) {} </code></td>
+        </tr>
+        <tr>
+            <td><code>while</code></td>
+            <td>Loop while condition is true</td>
+            <td><code>while (x < 10) {}</code></td>
+        </tr>
+        <tr>
+            <td><code>Function</code></td>
+            <td>Reusable block of code</td>
+            <td><code>int add(int a, int b) { return a + b; }</code></td>
+        </tr>
+    </table>
+        </section>
+
+        <div class="button-area">
+            <a href="U3C2.html" class="next-button">Back</a>
+            <a href="index.html" class="next-button">Home</a>
+        </div>
+    </div>
+</body>
+</html>
